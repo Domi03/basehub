@@ -532,6 +532,37 @@ namespace basehub
             }
         }
         #endregion
+
+        #region videostream
+
+        //Click on the Button starts the Videostream (and generates the Link)
+        private void button_get_Videostream_Click(object sender, EventArgs e)
+        {
+            //Create RTSP Link out of IP-Adress, Port and Path
+            if(textBox_IP_Videostream.Text != "" && textBox_Port_Videostream.Text != "" && textBox_Path_Videostream.Text != "")
+            { 
+                textBox_Link_Videostream.Text = string.Concat("rtsp://", textBox_IP_Videostream.Text, ":", textBox_Port_Videostream.Text, "/", textBox_Path_Videostream.Text); ;
+            }
+
+            if (textBox_Link_Videostream.Text != "")
+            {
+                //Start Videostream
+                vlcControl_Videostream.Play(new Uri(textBox_Link_Videostream.Text));
+            }
+            else
+            {
+                //Link to Videostream not set
+                MessageBox.Show(" Link to Videostream \n or IP Adress, Port and Path \n needed!", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+
+        private void button_stop_Videostream_Click(object sender, EventArgs e)
+        {
+            //Stop Videostream
+            vlcControl_Videostream.Stop();
+        }
+        #endregion
+
     }
 }
 
